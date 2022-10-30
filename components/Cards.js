@@ -58,6 +58,7 @@ const Cards = ({ title, url, copyright, mediaType, thumbnail }) => {
 
         <div className="rectangle w-[200px] h-[330px] lg:w-[330px] lg:h-[450px] mt-10 lg:mt-16">
           {/* Image Vs Video */}
+          
           {mediaType === "image" ? (
             <img
               onClick={toggleModal}

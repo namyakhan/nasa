@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 import Cards from "../components/Cards";
+import Loading from "../components/Loading";
+import SkeletonLoading from "../components/SkeletonLoading";
 
 export default function Home() {
   const [spotlightData, setSpotlightData] = useState([]);
   const [horizontalCardsData, setHorizontalCardsData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const spotlight = () => {
     fetch(
@@ -16,17 +20,19 @@ export default function Home() {
       .then((json) => {
         console.log("JSON DATA", json);
         setSpotlightData(json);
+        setLoading(true);
       });
   };
 
   const horizontalCards = () => {
     fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2022-09-28&end_date=2022-10-28&thumbs=true"
+      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2021-09-28&end_date=2022-10-28&thumbs=true"
     )
       .then((response) => response.json())
       .then((json) => {
         console.log("JSON DATA", json);
         setHorizontalCardsData(json);
+        setIsLoading(false);
       });
   };
 
@@ -45,31 +51,44 @@ export default function Home() {
       <div className="bg-black">
         <div className="container mx-auto px-5 b-20 ">
           <Navbar />
+
           <div>
-            {spotlightData.map((item, index) => (
-              <Layout
-                key={index}
-                title={item.title}
-                url={item.url}
-                copyright={item.copyright}
-                desc={item.explanation}
-                mediaType={item.media_type}
-                thumbnail={item.thumbnail_url}
-              />
-            ))}
+            {loading ? (
+              spotlightData.map((item, index) => (
+                <Layout
+                  key={index}
+                  title={item.title}
+                  url={item.url}
+                  copyright={item.copyright}
+                  desc={item.explanation}
+                  mediaType={item.media_type}
+                  thumbnail={item.thumbnail_url}
+                />
+              ))
+            ) : (
+              <Loading />
+            )}
           </div>
           <div className="grid grid-cols-7 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] overflow-auto  scrollbar-hide">
-            {horizontalCardsData.map((item, index) => (
-              <Cards
-                key={index}
-                title={item.title}
-                url={item.url}
-                copyright={item.copyright}
-                desc={item.explanation}
-                mediaType={item.media_type}
-                thumbnail={item.thumbnail_url}
-              />
-            ))}
+            {!isLoading ? (
+              horizontalCardsData.map((item, index) => (
+                <Cards
+                  key={index}
+                  title={item.title}
+                  url={item.url}
+                  copyright={item.copyright}
+                  desc={item.explanation}
+                  mediaType={item.media_type}
+                  thumbnail={item.thumbnail_url}
+                />
+              ))
+            ) : (
+              <div className="grid grid-cols-4 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] ">
+                <SkeletonLoading /> <SkeletonLoading /> <SkeletonLoading />{" "}
+                <SkeletonLoading /> <SkeletonLoading /> <SkeletonLoading />{" "}<SkeletonLoading /> <SkeletonLoading />
+                
+              </div>
+            )}
           </div>
         </div>
       </div>
