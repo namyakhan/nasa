@@ -1,26 +1,61 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Tomorrow:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rectangle {
+  background-image: url("/images/rectangle.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.box {
+  position: relative;
+}
+.box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  padding: 1.5px;
+  background: linear-gradient(90deg, #a21717 0%, #1e25c0 67.19%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@layer base {
+  h1 {
+    @apply font-[800] font-orbitron text-[24px] lg:text-[50px];
+  }
+  h2 {
+    @apply font-[800] font-orbitron text-[24px] lg:text-[35px] leading-tight mt-5 lg:mt-0;
+  }
+  h3 {
+    @apply font-[600] font-orbitron text-[20px] md:text-[30px];
+  }
+  h5 {
+    @apply font-[400] font-tomorrow  text-[13px] md:text-[16px] mt-3;
+  }
+
+  h6 {
+    @apply font-[400] font-tomorrow text-[10px] lg:text-[13px];
+  }
+
+  p {
+    @apply font-[200] font-tomorrow text-[16px] lg:text-[20px] mt-2;
+  }
+
+  button {
+    @apply box md:w-[300px] px-5 py-2 font-[800] text-[18px] lg:text-[20px] font-orbitron mt-5 lg:mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105  duration-300;
+  }
 }
 
 * {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+  color: white;
+  /* background-image: url("/images/ellipse.svg"); */
 }
