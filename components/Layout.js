@@ -30,6 +30,7 @@ const Layout = ({ title, url, copyright, desc, mediaType, thumbnail }) => {
             onClick={toggleModal}
             src={url}
             alt="logo"
+            loading="lazy"
             className="w-full h-full z-[100] "
           />
         </Modal>
@@ -68,6 +69,7 @@ const Layout = ({ title, url, copyright, desc, mediaType, thumbnail }) => {
               onClick={toggleModal}
               src={url}
               alt="space"
+              loading="lazy"
               className="rounded-md w-[300px] lg:w-[600px]"
             />
           ) : (
@@ -75,6 +77,7 @@ const Layout = ({ title, url, copyright, desc, mediaType, thumbnail }) => {
               onClick={toggleModal}
               src={thumbnail}
               alt="space"
+              loading="lazy"
               className="rounded-md w-[300px] lg:w-[600px]"
             />
           )}

@@ -31,6 +31,7 @@ const Cards = ({ title, url, copyright, mediaType, thumbnail }) => {
               onClick={toggleModal}
               src={url}
               alt="logo"
+              loading="lazy"
               className="w-full h-full z-[100] "
             />
           </Modal>
@@ -58,12 +59,13 @@ const Cards = ({ title, url, copyright, mediaType, thumbnail }) => {
 
         <div className="rectangle w-[200px] h-[330px] lg:w-[330px] lg:h-[450px] mt-10 lg:mt-16">
           {/* Image Vs Video */}
-          
+
           {mediaType === "image" ? (
             <img
               onClick={toggleModal}
               src={url}
               alt="space"
+              loading="lazy"
               className="rounded-md w-[200px] h-[200px] lg:w-[330px] lg:h-[300px]"
             />
           ) : (
@@ -71,12 +73,15 @@ const Cards = ({ title, url, copyright, mediaType, thumbnail }) => {
               onClick={toggleModal}
               src={thumbnail}
               alt="space"
+              loading="lazy"
               className="rounded-md w-[200px] h-[200px] lg:w-[330px] lg:h-[300px]"
             />
           )}
 
           <div className="p-2 lg:p-5">
-            <h2 className="font-[600] text-[12px] md:text-[16px] lg:text-[20px]">{title}</h2>
+            <h2 className="font-[600] text-[12px] md:text-[16px] lg:text-[20px]">
+              {title}
+            </h2>
             <h5 className="mt-1">{copyright}</h5>
             <h6 className="mt-1">24 April 2022</h6>
           </div>
