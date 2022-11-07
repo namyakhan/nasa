@@ -10,8 +10,8 @@ const Cards = ({ title, url, copyright, mediaType, thumbnail }) => {
   }
 
   return (
-    <div className="bg-black">
-      <div className="container mx-auto px-5">
+    <div className="bg-black ">
+      <div className="container mx-auto px-5 ">
         {/* Modal */}
         {mediaType === "image" ? (
           <Modal
