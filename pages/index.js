@@ -9,12 +9,13 @@ import SkeletonLoading from "../components/SkeletonLoading";
 export default function Home() {
   const [spotlightData, setSpotlightData] = useState([]);
   const [horizontalCardsData, setHorizontalCardsData] = useState([]);
+  const [horizontalCardsData2, setHorizontalCardsData2] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const spotlight = () => {
     fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2022-10-29&end_date=2022-10-29&thumbs=true"
+      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2022-10-31&end_date=2022-10-31&thumbs=true"
     )
       .then((response) => response.json())
       .then((json) => {
@@ -24,9 +25,9 @@ export default function Home() {
       });
   };
 
-  const horizontalCards = () => {
+  const horizontalCards1 = () => {
     fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2021-09-28&end_date=2022-10-28&thumbs=true"
+      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2022-09-27&end_date=2022-10-03&thumbs=true"
     )
       .then((response) => response.json())
       .then((json) => {
@@ -36,10 +37,23 @@ export default function Home() {
       });
   };
 
+  const horizontalCards2 = () => {
+    fetch(
+      "https://api.nasa.gov/planetary/apod?api_key=gaff4Pwpu0Qg6woyFty1YhVRxhj4In1ImvOCyFD7&start_date=2022-10-04&end_date=2022-10-10&thumbs=true"
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("JSON DATA2", json);
+        setHorizontalCardsData2(json);
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     spotlight();
-    horizontalCards();
-  }, []);
+    horizontalCards1();
+    horizontalCards2();
+  });
 
   return (
     <div>
@@ -84,11 +98,24 @@ export default function Home() {
               ))
             ) : (
               <div className="grid grid-cols-4 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] ">
-                <SkeletonLoading /> <SkeletonLoading /> <SkeletonLoading />{" "}
-                <SkeletonLoading /> <SkeletonLoading /> <SkeletonLoading />{" "}<SkeletonLoading /> <SkeletonLoading />
-                
+                <SkeletonLoading /> <SkeletonLoading /> <SkeletonLoading />
+                <SkeletonLoading />
               </div>
             )}
+          </div>
+
+          <div className="grid grid-cols-7 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] overflow-auto  scrollbar-hide">
+            {horizontalCardsData2.map((item, index) => (
+              <Cards
+                key={index}
+                title={item.title}
+                url={item.url}
+                copyright={item.copyright}
+                desc={item.explanation}
+                mediaType={item.media_type}
+                thumbnail={item.thumbnail_url}
+              />
+            ))}
           </div>
         </div>
       </div>
