@@ -104,7 +104,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="grid grid-cols-7 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] overflow-auto  scrollbar-hide">
+          <div className="grid grid-cols-7 gap-x-[220px] lg:gap-x-[380px] gap-y-[0px] overflow-auto  scrollbar-hide pb-20">
             {horizontalCardsData2.map((item, index) => (
               <Cards
                 key={index}
